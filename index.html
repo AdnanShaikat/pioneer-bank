@@ -32,7 +32,7 @@
             <div class="col-md-4">
                 <div class="withdrow status">
                     <h5>Withdrow</h5>
-                    <h2>$000</h2>
+                    <h2>$ <span id="currentWithdrow">00</span></h2>
                 </div>
             </div>
             <div class="col-md-4">
@@ -81,13 +81,29 @@
         const depositBtn = document.getElementById("addDeposit")
         depositBtn.addEventListener("click", function() {
             const depositNumber = getInputNumber("depositAmount");
-
-            
             updateSpanText("currentDeposit", depositNumber);
             updateSpanText("currentBalance", depositNumber);
 
+            
             document.getElementById("depositAmount").value = "";
         })
+
+        // Withdrow button even handler
+
+        const withdrowBtn = document.getElementById("addWithdrow")
+        withdrowBtn.addEventListener("click", function() {
+            const withdrowNumber = getInputNumber("withdrowAmount");
+            updateSpanText("currentWithdrow", withdrowNumber);
+            updateSpanText("currentBalance", -1* withdrowNumber);
+            document.getElementById("withdrowAmount").value = "";
+            
+        })
+
+        function getInputNumber(id) {
+            const amount = document.getElementById(id).value
+            const amountNumber = parseFloat(amount);
+            return amountNumber;
+        }
 
         function updateSpanText(id, depositNumber) {
             const current = document.getElementById(id).innerText
@@ -96,19 +112,7 @@
             document.getElementById(id).innerText = totalAmount;
         }
 
-        // Withdrow button even handler
-
-        const withdrowBtn = document.getElementById("addWithdrow")
-        withdrowBtn.addEventListener("click", function() {
-            const withdrowNumber = getInputNumber("withdrowAmount");
-            console.log(withdrowNumber);
-        })
-
-        function getInputNumber(id) {
-            const amount = document.getElementById(id).value
-            const amountNumber = parseFloat(amount);
-            return amountNumber;
-        }
+        
 
     </script>
 </body>
